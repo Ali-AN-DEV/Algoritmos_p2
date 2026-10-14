@@ -1,0 +1,66 @@
+- Contexto:
+
+La práctica 1 consiste en la evaluación del rendimiento de tres algoritmos en C, cuya finalidad será la de calcular la sucesión de Fibonacci, siendo dichas complejidades O(phi^n), O(n) y O(log n), respectivamente. Se exige también medir sus tiempos de ejecución para diferentes tamaños de entrada, y comprobar su complejidad analizando cocientes t(n) / f(n) frente a cotas teóricas, subestimadas y sobreestimadas.
+
+Integrantes: David Martínez Traba & Hugo Núñez Cristea & Ali Abu-afash Nayef
+ 
+- Introducción:
+
+En este informe se presentará un análisis experimental de las tres soluciones propuestas. Mediante los datos de tiempo obtenidos y el estudio de sus cocientes de ajuste, contrastaremos la teoría con el comportamiento real de cada algoritmo, así como evaluaremos su eficiencia a medida que crece el tamaño del problema.
+Todo el experimento ha sido realizado en un ordenador de las siguientes características: 
+- Memoria RAM: 16GiB
+- Procesador: 12th Gen Intel(R) Core(TM) i5-12450H
+- Versión del sistema operativo: 7.2.6.1 Cachy OS
+Se utilizarán microsegundos como medida de tiempo durante la totalidad del desarrollo de este informe.
+
+- Tabla Algoritmo 1 (O(phi^n), con phi = ((1+sqrt(5))/2):
+En el caso del primer algoritmo, se usa la función f(n) = 1,1^n para la cota subestimada y f(n) = 2n para la sobreestimada.
+
+         n           t(n)           t/1.1^n         t/phi^n           t/2^n        K
+         2       0.005250 *     0.004338843     0.002005322     0.001312500   100000
+         4       0.017030 *     0.011631719     0.002484644     0.001064375   100000
+         8       0.120500 *     0.056214139     0.002564991     0.000470703    10000
+        16       6.020000 *     1.310127397     0.002727685     0.000091858     1000
+        32   12611.000000     597.287740232     0.002589077     0.000002936        1
+                                               C = 0.0024743
+* tiempo promedio de K ejecuciones
+
+- Tabla Algoritmo 2 (O(n)):
+En el caso del segundo algoritmo, se usa la función f(n) = n^0.8 para la cota subestimada y f(n) = n log(n) para la sobreestimada.
+
+         n           t(n)           t/n^0.8             t/n    t/(n*log(n))        K
+      1000       1.511000 *     0.006015399     0.001511000     0.000218740     1000
+     10000      15.048000 *     0.009494646     0.001504800     0.000163382     1000
+    100000     155.102000 *     0.015510200     0.001551020     0.000134720     1000
+   1000000    1459.000000       0.023123592     0.001459000     0.000105606        1
+  10000000   15393.000000       0.038665468     0.001539300     0.000095501        1
+                                               C = 0.0015302
+* tiempo promedio de K ejecuciones
+
+- Tabla Algoritmo 3 (O(log(n)):
+En el caso del tercer algoritmo, se usa la función f(n) = sqrt(log(n)) para la cota subestimada y f(n) = n^0.5 para la sobreestimada.
+
+         n           t(n)    t/sqrt(log(n))        t/log(n)         t/n^0.5        K
+      1000       0.030070 *     0.011441026     0.004353078     0.000950897   100000
+     10000       0.039280 *     0.012942961     0.004264772     0.000392800   100000
+    100000       0.051100 *     0.015060107     0.004438490     0.000161592    10000
+   1000000       0.062700 *     0.016868795     0.004538377     0.000062700    10000
+  10000000       0.075800 *     0.018880450     0.004702789     0.000023970    10000
+                                               C = 0.0044595
+* tiempo promedio de K ejecuciones
+
+- Conclusión tabla 1:
+t(n) = O(phi^n)
+
+- Conclusión tabla 2: 
+t(n) = O(n)
+
+- Conclusión tabla 3:
+t(n) = (O(n))
+
+- Conclusión final:
+
+Las evaluaciones de las cotas subestimadas y sobreestimadas se comportan de manera esperada, mientras que se produce una gran diferencia de rendimiento entre fib1 y los otros dos algoritmos, puesto que fib1 es de carácter exponencial. El mejor algoritmo es fib3 debido a que es de carácter logarítmico. Véase el siguiente ejemplo que ilustra la diferencia de tiempo que tarda en ejecutarse cada algoritmo:
+ 32         12611.000000       597.28774023    0.002589077     0.000002936        1  (fib1)
+ 10000000   15393.000000       0.038665468     0.001539300     0.000095501        1  (fib2)
+ 10000000       0.075800*      0.018880450     0.004702789     0.000023970    10000  (fib3)
