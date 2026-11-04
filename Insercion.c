@@ -149,7 +149,7 @@ void ej3(){
 		printf("\nEj3 - tiempos en microsegundos\n");
 		printf("\nVector inicializado aleatoriamente:\n");
 		printf("%10s %13s\n", "v[n]", "t(µs)");		
-		for (n = 128; n <= 16384; n *= 2) {
+		for (n = 500; n <= 32000; n *= 2) {
 				t = medir_tiempo(ordenacionInsercion, aleatorio, n, &k);
 				if (k)
 						printf("* %8d %12.3f\n", n, t);
@@ -158,7 +158,7 @@ void ej3(){
 		}
 		printf("\nVector inicializado en orden ascendente:\n");
 		printf("%10s %13s\n", "v[n]", "t(µs)");
-		for (n = 128; n <= 16384; n *= 2) {
+		for (n = 500; n <= 32000; n *= 2) {
 				t = medir_tiempo(ordenacionInsercion, ascendente, n, &k);
 				if (k)
 						printf("* %8d %12.3f\n", n, t);
@@ -167,7 +167,7 @@ void ej3(){
 		}
 		printf("\nVector inicializado en orden descendente:\n");
 		printf("%10s %13s\n", "v[n]", "t(µs)");
-		for (n = 128; n <= 16384; n *= 2) {
+		for (n = 500; n <= 32000; n *= 2) {
 				t = medir_tiempo(ordenacionInsercion, descendente, n, &k);		
 				if (k)
 						printf("* %8d %12.3f\n", n, t);
