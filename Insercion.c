@@ -183,7 +183,8 @@ void ej4(){
 		int v[] = {500, 1000, 2000, 4000, 8000, 16000, 32000};
 		int i, n, k;
 		double t;
-		printf("\nTabla 1: Vector inicializado aleatoriamente - cotas t/n^1.8 (sub), t/n^2 (aj), t/n^2.2 (sobre)\n");
+		printf("\nTabla 1: Vector inicializado aleatoriamente - "
+			"cotas t/n^1.8 (sub), t/n^2 (aj), t/n^2.2 (sobre)\n");
 		printf("\n%10s%15s%2s%16s%16s%16s\n", "n", "t(n)", "", "t/n^1.8", "t/n^2", "t/n^2.2");
 		for (i = 0; i < 7; i++) {
 				n = v[i];
@@ -192,7 +193,8 @@ void ej4(){
 		}
 		printf("\n* tiempo promedio de K ejecuciones\n");
 
-		printf("\nTabla 2: Vector inicializado en orden ascendente - cotas t/n^1.8 (sub), t/n^2 (aj), t/n^2.2 (sobre)\n");
+		printf("\nTabla 2: Vector inicializado en orden ascendente -"
+			" cotas t/n^0.8 (sub), t/n (aj), t/n^1.2 (sobre)\n");
 		printf("\n%10s%15s%2s%16s%16s%16s\n", "n", "t(n)", "", "t/n^0.8", "t/n", "t/n^1.2");
 		for (i = 0; i < 7; i++) {
 				n = v[i];
@@ -201,7 +203,8 @@ void ej4(){
 		}
 		printf("\n* tiempo promedio de K ejecuciones\n");
 
-		printf("\nTabla 3: Vector inicializado en orden descendente - cotas t/n^1.8 (sub), t/n^2 (aj), t/n^2.2 (sobre)\n");
+		printf("\nTabla 3: Vector inicializado en orden descendente - "
+			"cotas t/n^1.8 (sub), t/n^2 (aj), t/n^2.2 (sobre)\n");
 		printf("\n%10s%15s%2s%16s%16s%16s\n", "n", "t(n)", "", "t/n^1.8", "t/n^2", "t/n^2.2");
 		for (i = 0; i < 7; i++) {
 				n = v[i];
@@ -212,6 +215,9 @@ void ej4(){
 }
 
 int main(){
-		ej3();
-		return 0;
+	inicializar_semilla();
+	test();
+	ej3();
+	ej4();	
+	return 0;
 }
