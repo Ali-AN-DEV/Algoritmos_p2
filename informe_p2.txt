@@ -1,0 +1,242 @@
+- Contexto:
+
+La práctica 2 consiste en la evaluación del rendimiento de dos algoritmos de ordenación en C: ordenación por inserción y ordenación por fusión (híbrida) con un umbral para detectar vectores pequeños. Se exige medir sus tiempos de ejecución para diferentes tamaños de entrada y tres situaciones iniciales distintas: (a) el vector ya está ordenado en orden ascendente, (b) el vector ya está ordenado en orden descendente, y (c) el vector está inicialmente desordenado. Además, se requiere comprobar su complejidad analizando los cocientes t(n) / f(n) frente a cotas teóricas, subestimadas y sobreestimadas, evaluando para la fusión híbrida diferentes valores de umbral (1, 20 y 200). 
+
+Integrantes: David Martínez Traba & Hugo Núñez Cristea & Ali Abu-afash Nayef
+ 
+- Introducción:
+
+En este informe se presentará un análisis experimental de las soluciones propuestas para la ordenación por inserción y la ordenación por fusión hibridada. Mediante los datos de tiempo obtenidos y el estudio de sus cocientes de ajuste, contrastaremos la teoría con el comportamiento real de cada algoritmo, así como evaluaremos su eficiencia a medida que crezca el tamaño del problema y según el estado inicial de los datos.
+
+Todo el experimento ha sido realizado en un ordenador de las siguientes características:
+- Memoria RAM: 16GiB
+- Procesador: 12th Gen Intel(R) Core(TM) i5-12450H
+- Versión del sistema operativo: 7.2.6.1 Cachy OS
+
+Se utilizarán microsegundos como medida de tiempo durante la totalidad del desarrollo de este informe.
+
+- Tablas de Ordenación por Inserción:
+
+Tabla 1: Vector inicializado aleatoriamente - cotas t/n^1.8 (sub), t/n^2 (aj), t/n^2.2 (sobre)
+
+         n           t(n)           t/n^1.8           t/n^2         t/n^2.2
+*      500         75.244       0.001043100     0.000300976     0.000086844
+*     1000        289.991       0.001154475     0.000289991     0.000072842
+      2000       1078.000       0.001232437     0.000269500     0.000058932
+      4000       4541.000       0.001490883     0.000283812     0.000054028
+      8000      18135.000       0.001709840     0.000283359     0.000046959
+     16000      72290.000       0.001957322     0.000282383     0.000040739
+     32000     271968.000       0.002114696     0.000265594     0.000033357
+
+- tiempo promedio de K ejecuciones
+
+Tabla 2: Vector inicializado en orden ascendente - cotas t/n^0.8 (sub), t/n (aj), t/n^1.2 (sobre)
+
+         n           t(n)           t/n^0.8             t/n         t/n^1.2
+*      500          0.767       0.005316421     0.001534000     0.000442620
+*     1000          1.427       0.005680989     0.001427000     0.000358446
+*     2000          2.884       0.006594339     0.001442000     0.000315326
+*     4000          5.341       0.007014143     0.001335250     0.000254185
+*     8000         11.731       0.008848365     0.001466375     0.000243012
+*    16000         23.648       0.010244681     0.001478000     0.000213231
+*    32000         48.856       0.012156202     0.001526750     0.000191751
+
+- tiempo promedio de K ejecuciones
+
+Tabla 3: Vector inicializado en orden descendente - cotas t/n^1.8 (sub), t/n^2 (aj), t/n^2.2 (sobre)
+
+         n           t(n)           t/n^1.8           t/n^2         t/n^2.2
+*      500        135.215       0.001874472     0.000540860     0.000156060
+      1000        519.000       0.002066176     0.000519000     0.000130367
+      2000       2129.000       0.002434006     0.000532250     0.000116388
+      4000       8380.000       0.002751288     0.000523750     0.000099704
+      8000      34637.000       0.003265715     0.000541203     0.000089690
+     16000     136131.000       0.003685879     0.000531762     0.000076717
+     32000     524252.000       0.004076338     0.000511965     0.000064300
+
+- tiempo promedio de K ejecuciones
+
+- Tablas de Ordenación por Fusión Híbrida:
+
+Ordenacion con umbral 1 e inicializacion aleatoria
+         n          t(n)         t(n)/n    t(n)/(n*ln(n))    t(n)/(n*ln^2(n))
+*     1000       77.781     0.07778100        0.01125995          0.00163005
+*     2000      170.548     0.08527400        0.01121893          0.00147600
+*     4000      359.896     0.08997400        0.01084802          0.00130793
+      8000      779.000     0.09737500        0.01083486          0.00120559
+     16000     1593.000     0.09956250        0.01028502          0.00106246
+     32000     3653.000     0.11415625        0.01100461          0.00106084
+     64000     7547.000     0.11792187        0.01065562          0.00096286
+    128000    16489.000     0.12882031        0.01095431          0.00093151
+    256000    32939.000     0.12866797        0.01033234          0.00082971
+    512000    70541.000     0.13777539        0.01048034          0.00079722
+
+Ordenacion con umbral 20 e inicializacion aleatoria
+         n          t(n)         t(n)/n    t(n)/(n*ln(n))    t(n)/(n*ln^2(n))
+*     1000       56.652     0.05665200        0.00820122          0.00118725
+*     2000      127.321     0.06366050        0.00837539          0.00110189
+*     4000      274.510     0.06862750        0.00827431          0.00099762
+      8000      643.000     0.08037500        0.00894328          0.00099511
+     16000     1272.000     0.07950000        0.00821252          0.00084837
+     32000     2914.000     0.09106250        0.00877839          0.00084623
+     64000     6404.000     0.10006250        0.00904182          0.00081703
+    128000    13482.000     0.10532812        0.00895664          0.00076163
+    256000    28679.000     0.11202734        0.00899606          0.00072241
+    512000    61420.000     0.11996094        0.00912523          0.00069414
+
+Ordenacion con umbral 200 e inicializacion aleatoria
+         n          t(n)         t(n)/n    t(n)/(n*ln(n))    t(n)/(n*ln^2(n))
+*     1000       68.500     0.06850000        0.00991639          0.00143554
+*     2000      145.710     0.07285500        0.00958505          0.00126104
+*     4000      330.207     0.08255175        0.00995313          0.00120003
+      8000      705.000     0.08812500        0.00980562          0.00109106
+     16000     1678.000     0.10487500        0.01083381          0.00111916
+     32000     3261.000     0.10190625        0.00982372          0.00094700
+     64000     7206.000     0.11259375        0.01017416          0.00091935
+    128000    15678.000     0.12248438        0.01041553          0.00088569
+    256000    33206.000     0.12971094        0.01041610          0.00083644
+    512000    69187.000     0.13513086        0.01027918          0.00078192
+
+Ordenacion con umbral 1 e inicializacion ascendente
+         n          t(n)         t(n)/n    t(n)/(n*ln(n))    t(n)/(n*ln^2(n))
+*     1000       33.280     0.03328000        0.00481777          0.00069744
+*     2000       69.220     0.03461000        0.00455341          0.00059906
+*     4000      146.244     0.03656100        0.00440810          0.00053148
+*     8000      317.397     0.03967462        0.00441457          0.00049121
+     16000      648.000     0.04050000        0.00418374          0.00043219
+     32000     1357.000     0.04240625        0.00408794          0.00039408
+     64000     3242.000     0.05065625        0.00457738          0.00041362
+    128000     6477.000     0.05060156        0.00430293          0.00036590
+    256000    13019.000     0.05085547        0.00408381          0.00032794
+    512000    28640.000     0.05593750        0.00425507          0.00032368
+
+Ordenacion con umbral 20 e inicializacion ascendente
+         n          t(n)         t(n)/n    t(n)/(n*ln(n))    t(n)/(n*ln^2(n))
+*     1000       17.379     0.01737900        0.00251587          0.00036421
+*     2000       38.028     0.01901400        0.00250155          0.00032911
+*     4000       85.872     0.02146800        0.00258836          0.00031207
+*     8000      185.004     0.02312550        0.00257316          0.00028631
+*    16000      409.906     0.02561912        0.00264651          0.00027339
+     32000     1036.000     0.03237500        0.00312094          0.00030086
+     64000     1927.000     0.03010938        0.00272073          0.00024585
+    128000     4096.000     0.03200000        0.00272114          0.00023139
+    256000     9644.000     0.03767188        0.00302514          0.00024293
+    512000    19084.000     0.03727344        0.00283533          0.00021568
+
+Ordenacion con umbral 200 e inicializacion ascendente
+         n          t(n)         t(n)/n    t(n)/(n*ln(n))    t(n)/(n*ln^2(n))
+*     1000        8.683     0.00868300        0.00125699          0.00018197
+*     2000       21.951     0.01097550        0.00144397          0.00018997
+*     4000       51.729     0.01293225        0.00155922          0.00018799
+*     8000      118.209     0.01477613        0.00164413          0.00018294
+*    16000      272.312     0.01701950        0.00175815          0.00018162
+     32000      600.000     0.01875000        0.00180749          0.00017424
+     64000     1338.000     0.02090625        0.00188912          0.00017070
+    128000     2864.000     0.02237500        0.00190267          0.00016179
+    256000     9288.000     0.03628125        0.00291347          0.00023396
+    512000    13741.000     0.02683789        0.00204151          0.00015529
+
+Ordenacion con umbral 1 e inicializacion descendente
+         n          t(n)         t(n)/n    t(n)/(n*ln(n))    t(n)/(n*ln^2(n))
+*     1000       34.400     0.03440000        0.00497991          0.00072092
+*     2000       71.443     0.03572150        0.00469964          0.00061830
+*     4000      150.362     0.03759050        0.00453223          0.00054644
+*     8000      318.467     0.03980838        0.00442945          0.00049286
+     16000      800.000     0.05000000        0.00516511          0.00053357
+     32000     1600.000     0.05000000        0.00481998          0.00046464
+     64000     2983.000     0.04660938        0.00421170          0.00038058
+    128000     5875.000     0.04589844        0.00390300          0.00033189
+    256000    13273.000     0.05184766        0.00416349          0.00033434
+    512000    27460.000     0.05363281        0.00407976          0.00031034
+
+Ordenacion con umbral 20 e inicializacion descendente
+         n          t(n)         t(n)/n    t(n)/(n*ln(n))    t(n)/(n*ln^2(n))
+*     1000       28.413     0.02841300        0.00411320          0.00059545
+*     2000       61.237     0.03061850        0.00402827          0.00052997
+*     4000      130.843     0.03271075        0.00394388          0.00047551
+*     8000      278.867     0.03485838        0.00387867          0.00043158
+     16000      623.000     0.03893750        0.00402233          0.00041551
+     32000     1162.000     0.03631250        0.00350051          0.00033745
+     64000     2701.000     0.04220313        0.00381355          0.00034460
+    128000     5630.000     0.04398437        0.00374024          0.00031805
+    256000    11328.000     0.04425000        0.00355338          0.00028534
+    512000    25369.000     0.04954883        0.00376910          0.00028671
+
+Ordenacion con umbral 200 e inicializacion descendente
+         n          t(n)         t(n)/n    t(n)/(n*ln(n))    t(n)/(n*ln^2(n))
+*     1000       79.137     0.07913700        0.01145625          0.00165846
+*     2000      180.908     0.09045400        0.01190043          0.00156566
+*     4000      334.759     0.08368975        0.01009034          0.00121658
+      8000      663.000     0.08287500        0.00922145          0.00102607
+     16000     1340.000     0.08375000        0.00865155          0.00089372
+     32000     2781.000     0.08690625        0.00837772          0.00080761
+     64000     5545.000     0.08664062        0.00782899          0.00070744
+    128000    12942.000     0.10110938        0.00859789          0.00073113
+    256000    26167.000     0.10221484        0.00820809          0.00065913
+    512000    53834.000     0.10514453        0.00799817          0.00060841
+
+(*) tiempo promedio de K = 1000 ejecuciones
+
+- Tablas del Ejercicio 4 (Comparación de Umbrales):
+
+Inicialización aleatoria
+         n      umbral 1     umbral 20    umbral 200    mejor
+      1000       90.766*       57.762*       68.264*       20
+      2000      165.665*      128.911*      150.190*       20
+      4000      356.282*      281.628*      324.197*       20
+      8000      797.000       564.000       770.000        20
+     16000     1668.000      1372.000      1787.000        20
+     32000     3643.000      3155.000      3193.000        20
+     64000     7659.000      6362.000      7402.000        20
+    128000    16473.000     13794.000     15362.000        20
+    256000    34405.000     28812.000     31487.000        20
+    512000    69894.000     60771.000     66914.000        20
+
+Inicialización ascendente
+         n      umbral 1     umbral 20    umbral 200    mejor
+      1000       34.191*       17.942*        9.082*      200
+      2000       70.416*       38.962*       20.571*      200
+      4000      146.354*       88.058*       50.289*      200
+      8000      313.746*      187.743*      115.674*      200
+     16000      740.000       407.582*      258.760*      200
+     32000     1335.000       877.000       618.000       200
+     64000     3372.000      1968.000      1273.000       200
+    128000     6756.000      3854.000      2893.000       200
+    256000    13413.000      8615.000      6260.000       200
+    512000    26065.000     18633.000     13658.000       200
+
+Inicialización descendente
+         n      umbral 1     umbral 20    umbral 200    mejor
+      1000       34.656*       28.873*       85.130*       20
+      2000       71.970*       60.298*      162.120*       20
+      4000      147.708*      128.643*      339.010*       20
+      8000      323.405*      277.336*      974.000        20
+     16000      722.000       577.000      1672.000        20
+     32000     1548.000       986.000      2987.000        20
+     64000     3224.000      2655.000      5604.000        20
+    128000     6532.000      5576.000     12062.000        20
+    256000    13925.000     12197.000     26122.000        20
+    512000    28673.000     24961.000     50122.000        20
+
+- Respuesta al Ejercicio 4 (¿Con qué umbral se obtienen los mejores tiempos y por qué?):
+
+1. Casos aleatorio y descendente:
+El umbral 20 logra los mejores tiempos. Con umbral 1 (fusión pura) hay demasiadas llamadas recursivas y copias auxiliares. Con umbral 20, la inserción directa ordena de forma muy eficiente los bloques pequeños. En cambio, con umbral 200, la complejidad O(n^2) de la inserción penaliza al aplicarse sobre subbloques grandes desordenados.
+
+2. Caso ascendente:
+El umbral 200 es el más rápido. Con los datos ya ordenados, la inserción opera en su mejor caso lineal O(n). Al fijar un umbral de 200, los subbloques se resuelven de inmediato con una sola pasada y sin hacer intercambios ni copias auxiliares, reduciendo al mínimo el coste recursivo.
+
+- Conclusión Ordenación por Inserción:
+t(n) = O(n) (mejor caso: ordenado ascendente) / t(n) = O(n^2) (peor caso: descendente / desordenado)
+
+- Conclusión Ordenación por Fusión Híbrida: t(n) = O(n log n)
+
+- Conclusión final:
+Las cotas calculadas confirman la teoria de complejidad de ambos algoritmos. La insercion depende enormemente de la ordenacion previa de los datos, mientras que la fusion hibrida mantiene un alto rendimiento en cualquier situacion. Aplicar un umbral adecuado optimiza la ejecucion al evitar llamadas recursivas en subvectores pequenos. Vease el siguiente ejemplo ilustrativo con los tiempos reales obtenidos para el tamaño n = 512000:
+
+En inicializacion aleatoria, el umbral 20 logra el mejor tiempo con 61420.000 microsegundos, superando al umbral 1 (70541.000 microsegundos) y al umbral 200 (69187.000 microsegundos).
+
+En inicializacion ascendente, el umbral 200 obtiene el mejor rendimiento con 13741.000 microsegundos, frente a los 19084.000 microsegundos del umbral 20 y los 28640.000 microsegundos del umbral 1.
+
+En inicializacion descendente, el umbral 20 es el mas rapido con 25369.000 microsegundos, por delante del umbral 1 (27460.000 microsegundos) y del umbral 200 (53834.000 microsegundos).
+
