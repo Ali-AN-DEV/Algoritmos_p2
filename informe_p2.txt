@@ -28,7 +28,7 @@ Tabla 1: Vector inicializado aleatoriamente - cotas t/n^1.8 (sub), t/n^2 (aj), t
      16000      72290.000       0.001957322     0.000282383     0.000040739
      32000     271968.000       0.002114696     0.000265594     0.000033357
 
-- tiempo promedio de K ejecuciones
+(*) tiempo promedio de K = 1000 ejecuciones
 
 Tabla 2: Vector inicializado en orden ascendente - cotas t/n^0.8 (sub), t/n (aj), t/n^1.2 (sobre)
 
@@ -41,7 +41,7 @@ Tabla 2: Vector inicializado en orden ascendente - cotas t/n^0.8 (sub), t/n (aj)
 *    16000         23.648       0.010244681     0.001478000     0.000213231
 *    32000         48.856       0.012156202     0.001526750     0.000191751
 
-- tiempo promedio de K ejecuciones
+(*) tiempo promedio de K = 1000 ejecuciones
 
 Tabla 3: Vector inicializado en orden descendente - cotas t/n^1.8 (sub), t/n^2 (aj), t/n^2.2 (sobre)
 
@@ -54,7 +54,7 @@ Tabla 3: Vector inicializado en orden descendente - cotas t/n^1.8 (sub), t/n^2 (
      16000     136131.000       0.003685879     0.000531762     0.000076717
      32000     524252.000       0.004076338     0.000511965     0.000064300
 
-- tiempo promedio de K ejecuciones
+(*) tiempo promedio de K = 1000 ejecuciones
 
 - Tablas de Ordenación por Fusión Híbrida:
 
